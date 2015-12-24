@@ -4,11 +4,11 @@ import srmbot
 
 news = srmbot.getNews()
 
-From = from_add
+From = "srm_news_notifier@yahoo.com"
 To = []
 Subj = "Important News"
 Text = ""
-password = ""
+password = "warlock111"
 for e in range(len(news)):
     Text += str(e+1) + ". " + news[e].text + '\n\n'
 
