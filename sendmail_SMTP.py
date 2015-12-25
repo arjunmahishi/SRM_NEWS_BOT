@@ -2,7 +2,7 @@ import smtplib, os
 
 #Getting data , Function can also be used
 user = 'srm.news.notifier@gmail.com'
-pwd = 'notifier.gmail'
+pwd = raw_input("Enter our GMail password:")
 recipient = 'srm.news.notifier@gmail.com'
 subject = 'Test'
 body = 'testing via SMTP'
