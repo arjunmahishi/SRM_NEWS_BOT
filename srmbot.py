@@ -23,7 +23,30 @@ def getNews():
         print "Internet not working"
     return news
 
+def getNewNews():
+    file_name = "oldnews.txt"
+    obj = open(file_name)
+    oldNews = obj.read().split('\n')
+    news = getNews()
+    newNews = []
+    for item in news:
+        if item.text not in oldNews:
+            newNews.append(item)
+    obj.close()
+    return newNews
+
+def updateFile(newNews):
+    obj = open('oldnews.txt','a')
+    for item in newNews:
+        obj.write(item.text + '\n')
+    obj.close()
+
 if __name__ == '__main__':
     news = getNews()
-    displayAllNews(news)
+    newNews = getNewNews()
+    if len(newNews) == 0:
+        print "Nothing new on the website"
+    else:
+        displayAllNews(newNews)
+    updateFile(newNews)
     raw_input() # hold

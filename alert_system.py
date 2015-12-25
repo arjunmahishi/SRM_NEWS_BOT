@@ -27,10 +27,15 @@ def getBatch(item):
     return batch
 
 def getKeyWords(item):
-    ref = ['exam','change in schedule',
-           'timetable','urgent'] # ADD MORE #
+    ref = ['exam','change in schedule','dates', 'rescheduled'
+           'timetable','urgent', 'time table', 'schedule','practicals'
+           ] # ADD MORE #
     keyWords = []
     for e in ref:
-        if e in item.text.lower():
+        if e in item.text.lower() and e not in keyWords:
             keyWords.append(e)
     return keyWords
+
+# TESTING #
+#for e in news:
+ #   print getKeyWords(e)
