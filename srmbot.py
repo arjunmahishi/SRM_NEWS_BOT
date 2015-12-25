@@ -2,12 +2,11 @@ import urllib2
 from bs4 import BeautifulSoup
 
 class newsItem:
-    def getScore(self):
-        score = 0
-        return score
+    def updateScore(self,score):
+        self.score = score
     def __init__(self,text):
         self.text = text
-        self.score = self.getScore()
+        self.score = 0
 
 def displayAllNews(news):
     for i in range(len(news)):
