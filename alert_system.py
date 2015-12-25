@@ -26,10 +26,11 @@ def getBatch(item):
         batch.append('fourth year')
     return batch
 
+# Get keywords from http://www.srmuniv.ac.in
 def getKeyWords(item):
     ref = ['exam','change in schedule','dates', 'rescheduled'
-           'timetable','urgent', 'time table', 'schedule','practicals'
-           ] # ADD MORE #
+           'timetable','urgent', 'time table', 'schedule','practicals', 'postponed', 'tournaments', 'attendance'
+           ] # ADD MORE #  #Sports categoory can also be added
     keyWords = []
     for e in ref:
         if e in item.text.lower() and e not in keyWords:
