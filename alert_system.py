@@ -14,10 +14,15 @@ def getStream(item):
         streams.append('dental')
     return streams
 
-d = {}
+def getBatch(item):
+    batch = []
+    if 'first year' in item.text or '1st year' in item.text:
+        batch.append('first year')
+    if 'second year' in item.text or '2nd year' in item.text:
+        batch.append('second year')
+    if 'third year' in item.text or '3rd year' in item.text:
+        batch.append('third year')
+    if 'fourth year' in item.text or '4th year' in item.text:
+        batch.append('fourth year')
+    return batch
 
-for i in range(len(news)):
-    d[news[i].text] = getStream(news[i])
-    
-for w in news:
-    print str(w.text) + " : " + str(d[w.text])
