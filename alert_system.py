@@ -26,3 +26,11 @@ def getBatch(item):
         batch.append('fourth year')
     return batch
 
+def getKeyWords(item):
+    ref = ['exam','change in schedule',
+           'timetable','urgent'] # ADD MORE #
+    keyWords = []
+    for e in ref:
+        if e in item.text.lower():
+            keyWords.append(e)
+    return keyWords
