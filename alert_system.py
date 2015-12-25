@@ -16,13 +16,13 @@ def getStream(item):
 
 def getBatch(item):
     batch = []
-    if 'first year' in item.text or '1st year' in item.text:
+    if 'first year' in item.text.lower() or '1st year' in item.text.lower():
         batch.append('first year')
-    if 'second year' in item.text or '2nd year' in item.text:
+    if 'second year' in item.text.lower() or '2nd year' in item.text.lower():
         batch.append('second year')
-    if 'third year' in item.text or '3rd year' in item.text:
+    if 'third year' in item.text.lower() or '3rd year' in item.text.lower():
         batch.append('third year')
-    if 'fourth year' in item.text or '4th year' in item.text:
+    if 'fourth year' in item.text.lower() or '4th year' in item.text.lower():
         batch.append('fourth year')
     return batch
 
