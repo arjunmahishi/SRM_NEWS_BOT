@@ -28,8 +28,10 @@ def getBatch(item):
 
 # Get keywords from http://www.srmuniv.ac.in
 def getKeyWords(item):
-    ref = ['exam','change in schedule','dates', 'rescheduled'
-           'timetable','urgent', 'time table', 'schedule','practicals', 'postponed', 'tournaments', 'attendance'
+    ref = [
+           'exam','change in schedule','dates', 'rescheduled','holiday',
+           'holidays','timetable','urgent', 'time table', 'schedule',
+           'practicals', 'postponed', 'tournaments', 'attendance'
            ] # ADD MORE #  #Sports categoory can also be added
     keyWords = []
     for e in ref:
