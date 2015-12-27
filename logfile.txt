@@ -1,0 +1,7 @@
+2015-12-27 23:44:29.450000 : Nothing new on the website
+2015-12-27 23:44:33.893000 : Nothing new on the website
+2015-12-27 23:44:50.010000 : Nothing new on the website
+2015-12-27 23:45:14.989000 : Nothing new on the website
+2015-12-27 23:46:38.985000 : 1 news items are new!
+2015-12-27 23:47:22.591000 : Nothing new on the website
+2015-12-27 23:47:39.752000 : 1 news items are new!
