@@ -27,7 +27,6 @@ def getNewNews():
     file_name = "oldnews.txt"
     obj = open(file_name)
     oldNews = obj.read().split('\n')
-    news = getNews()
     newNews = []
     for item in news:
         if item.text not in oldNews:
