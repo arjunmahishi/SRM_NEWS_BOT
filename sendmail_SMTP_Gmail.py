@@ -1,16 +1,18 @@
-import smtplib, os
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.image import MIMEImage
+from email.mime.multipart import MIMEMultipart
 
 #Getting data , Function can also be used
-user = 'srm.news.notifier@gmail.com'
-pwd = raw_input("Enter our GMail password:")
 recipient = 'srm.news.notifier@gmail.com'
 subject = 'Test'
-body = 'testing via SMTP'
+obj = open('template.html')
+body = MIMEText(obj.read(), 'html')
 
 
-gmail_user = user
-gmail_pwd = pwd
-FROM = user
+gmail_user = 'srm.news.notifier@gmail.com'
+gmail_pwd = raw_input("Enter the GMail password:")
+FROM = gmail_user
 TO = recipient if type(recipient) is list else [recipient]
 SUBJECT = subject
 TEXT = body
@@ -25,6 +27,6 @@ try:
             server.login(gmail_user, gmail_pwd)
             server.sendmail(FROM, TO, message)
             server.quit()
-            print 'successfully sent the mail'
+            print 'Successfully sent the mail'
 except:
-            print "failed to send mail"
+            print "Unable to send message, try again"
