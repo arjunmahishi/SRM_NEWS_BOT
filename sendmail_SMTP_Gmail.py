@@ -17,7 +17,7 @@ def sendMail(newNews):
 	TEXT = ""
 	
 	for i in range(len(newNews)): # contents #
-                TEXT += str(i) + ". " + newNews[i].text + '\n'
+                TEXT += str(i + 1) + ". " + newNews[i].text + '\n'
                 
 	message = """\From: %s\nTo: %s\nSubject: %s\n\n%s
 	""" % (FROM, ", ".join(TO), SUBJECT, TEXT)
