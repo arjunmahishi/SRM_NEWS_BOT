@@ -3,7 +3,6 @@ from multiprocessing import Process
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
-import srmbot
 
 def sendMail(newNews):
 	gmail_user = 'srm.news.notifier@gmail.com'
