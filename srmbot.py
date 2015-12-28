@@ -66,5 +66,4 @@ if __name__ == '__main__':
         sendmail_SMTP_Gmail.sendMail(newNews)
         displayAllNews(newNews)
         updateLog(str(len(newNews)) + " news items are new!")
-    updateFile(newNews)
-    raw_input() # hold
+        updateFile(newNews)
