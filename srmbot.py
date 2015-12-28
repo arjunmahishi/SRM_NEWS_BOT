@@ -1,4 +1,4 @@
-import urllib2, datetime, sendmail_SMTP_GMail
+import urllib2, datetime, sendmail_SMTP_Gmail
 from bs4 import BeautifulSoup
 
 class newsItem:
@@ -38,13 +38,10 @@ def getNewNews():
     return newNews
 
 def updateFile(newNews):
-    obj1 = open('old_news.txt','a')
-    abj2 = open('new_news.txt','a')
+    obj = open('old_news.txt','a')
     for item in newNews:
-        obj1.write(item.text + '\n')
-        obj2.write(item.text + '\n')
-    obj1.close()
-    obj2.close()
+        obj.write(item.text + '\n')
+    obj.close()
 
 def updateLog(msg):
     '''
@@ -59,7 +56,6 @@ def updateLog(msg):
 
 if __name__ == '__main__':
     newNews = getNewNews()
-    sendMail(newNews)
     if newNews == 'fail':
         print "Not able to reach SRM"
         updateLog("Not able to reach SRM")
@@ -67,6 +63,7 @@ if __name__ == '__main__':
         print "Nothing new on the website"
         updateLog("Nothing new on the website")
     else:
+        sendmail_SMTP_Gmail.sendMail(newNews)
         displayAllNews(newNews)
         updateLog(str(len(newNews)) + " news items are new!")
     updateFile(newNews)
