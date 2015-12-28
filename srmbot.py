@@ -25,7 +25,7 @@ def getNews():
     return news
 
 def getNewNews():
-    file_name = "oldnews.txt"
+    file_name = "old_news.txt"
     obj = open(file_name)
     oldNews = obj.read().split('\n')
     news = getNews()
@@ -39,10 +39,13 @@ def getNewNews():
     return newNews
 
 def updateFile(newNews):
-    obj = open('oldnews.txt','a')
+    obj1 = open('old_news.txt','a')
+    abj2 = open('new_news.txt','a')
     for item in newNews:
-        obj.write(item.text + '\n')
-    obj.close()
+        obj1.write(item.text + '\n')
+        obj2.write(item.text + '\n')
+    obj1.close()
+    obj2.close()
 
 def updateLog(msg):
     '''
