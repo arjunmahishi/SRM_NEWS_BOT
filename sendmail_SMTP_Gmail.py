@@ -3,19 +3,16 @@ from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
 
-#Getting data , Function can also be used
-recipient = 'srm.news.notifier@gmail.com'
-subject = 'Test'
-obj = open('template.html')
-body = MIMEText(obj.read(), 'html')
-
-
 gmail_user = 'srm.news.notifier@gmail.com'
 gmail_pwd = raw_input("Enter the GMail password:")
+
+obj1 = open('new_news.txt')
+obj2 = open('email_list.txt')
+recipient = obj2.read()
 FROM = gmail_user
 TO = recipient if type(recipient) is list else [recipient]
-SUBJECT = subject
-TEXT = body
+SUBJECT = 'News Updates'
+TEXT = obj1.read()
 
 # Prepare actual message
 message = """\From: %s\nTo: %s\nSubject: %s\n\n%s
