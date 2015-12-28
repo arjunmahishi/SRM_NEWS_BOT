@@ -1,6 +1,5 @@
-import urllib2
+import urllib2, datetime, sendmail_SMTP_GMail
 from bs4 import BeautifulSoup
-import datetime
 
 class newsItem:
     def updateScore(self,score):
@@ -60,6 +59,7 @@ def updateLog(msg):
 
 if __name__ == '__main__':
     newNews = getNewNews()
+    sendMail(newNews)
     if newNews == 'fail':
         print "Not able to reach SRM"
         updateLog("Not able to reach SRM")
