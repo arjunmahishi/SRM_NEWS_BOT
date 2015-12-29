@@ -2,23 +2,25 @@ import urllib2, datetime, sendmail_SMTP_Gmail
 from bs4 import BeautifulSoup
 
 class newsItem:
-    def updateScore(self,score):
-        self.score = score
-    def __init__(self,text):
-        self.text = text
-        self.score = 0
+    def __init__(self,title,link,snip):
+        self.title = title
+        self.snip = snip
+        self.link = link
 
 def displayAllNews(news):
     for i in range(len(news)):
-        print str(i+1) + ". " + news[i].text
+        print str(i+1) + ". " + news[i].title
 
 def getNews():
     news = []
     try:
-        data = urllib2.urlopen("http://www.srmuniv.ac.in").read()
+        data = urllib2.urlopen("http://www.srmuniv.ac.in/Announcements").read()
         soup = BeautifulSoup(data,'html.parser')
-        for tag in soup.find_all('div',{'class':'views-field views-field-title'}):
-            news.append(newsItem(tag.text.strip()))
+        for tag in soup.find_all('div',{'class':'col-lg-10  col-xs-10 col-sm-10 col-md-10 latest-text padding-left-10px'}):
+            title = tag.find_all('h4')[0].text
+            link = "http://www.srmuniv.ac.in" + tag.find_all('a')[0].get('href')
+            snip = tag.find_all('p')[0].text.replace('... More','...')
+            news.append(newsItem(title,link,snip))
     except urllib2.URLError:
         return "fail"
     return news
@@ -32,7 +34,7 @@ def getNewNews():
         return "fail"
     newNews = []
     for item in news:
-        if item.text not in oldNews:
+        if item.title not in oldNews:
             newNews.append(item)
     obj.close()
     return newNews
@@ -40,7 +42,7 @@ def getNewNews():
 def updateFile(newNews):
     obj = open('old_news.txt','a')
     for item in newNews:
-        obj.write(item.text + '\n')
+        obj.write(item.title + '\n')
     obj.close()
 
 def updateLog(msg):
@@ -67,3 +69,4 @@ if __name__ == '__main__':
         displayAllNews(newNews)
         updateLog(str(len(newNews)) + " news items are new!")
         updateFile(newNews)
+    raw_input() # hold
