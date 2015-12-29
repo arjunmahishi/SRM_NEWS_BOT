@@ -18,7 +18,7 @@ def getNews():
         data = urllib2.urlopen("http://www.srmuniv.ac.in").read()
         soup = BeautifulSoup(data,'html.parser')
         for tag in soup.find_all('div',{'class':'views-field views-field-title'}):
-            news.append(newsItem(str(datetime.datetime.now()) + " : " + tag.text.strip()))
+            news.append(newsItem(tag.text.strip()))
     except urllib2.URLError:
         return "fail"
     return news
