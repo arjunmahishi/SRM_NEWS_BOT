@@ -11,3 +11,6 @@
 2015-12-28 20:03:08.266000 : 1 news items are new!
 2015-12-28 20:04:20.842000 : Nothing new on the website
 2015-12-28 20:05:12.217000 : Nothing new on the website
+2015-12-30 01:39:19.891000 : 15 news items are new!
+2015-12-30 02:32:59.545000 : Nothing new on the website
+2015-12-30 02:34:29.483000 : 15 news items are new!

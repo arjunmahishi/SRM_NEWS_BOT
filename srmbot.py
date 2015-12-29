@@ -1,4 +1,4 @@
-import urllib2, datetime, sendmail_SMTP_Gmail
+import urllib2, datetime, sendmail_SMTPwHTML_Gmail
 from bs4 import BeautifulSoup
 
 class newsItem:
@@ -73,8 +73,8 @@ if __name__ == '__main__':
         print "Nothing new on the website"
         updateLog("Nothing new on the website")
     else:
-        sendmail_SMTP_Gmail.sendMail(newNews)
+        sendmail_SMTPwHTML_Gmail.sendMail(newNews)
         displayAllNews(newNews)
         updateLog(str(len(newNews)) + " news items are new!")
         updateFile(newNews)
-    raw_input() # hold
+    #raw_input() # hold
