@@ -14,9 +14,17 @@ def displayAllNews(news):
 def getNews():
     news = []
     try:
-        data = urllib2.urlopen("http://www.srmuniv.ac.in/Announcements").read()
-        soup = BeautifulSoup(data,'html.parser')
-        for tag in soup.find_all('div',{'class':'col-lg-10  col-xs-10 col-sm-10 col-md-10 latest-text padding-left-10px'}):
+        data1 = urllib2.urlopen("http://www.srmuniv.ac.in/Announcements").read()
+        data2 = urllib2.urlopen("http://www.srmuniv.ac.in/University-News").read()
+        soup1 = BeautifulSoup(data1,'html.parser')
+        soup2 = BeautifulSoup(data2,'html.parser')
+        for tag in soup1.find_all('div',{'class':'col-lg-10  col-xs-10 col-sm-10 col-md-10 latest-text padding-left-10px'}):
+            title = tag.find_all('h4')[0].text
+            link = "http://www.srmuniv.ac.in" + tag.find_all('a')[0].get('href')
+            snip = tag.find_all('p')[0].text.replace('... More','...')
+            news.append(newsItem(title,link,snip))
+
+        for tag in soup2.find_all('div',{'class':'col-lg-10  col-xs-10 col-sm-10 col-md-10 latest-text padding-left-10px'}):
             title = tag.find_all('h4')[0].text
             link = "http://www.srmuniv.ac.in" + tag.find_all('a')[0].get('href')
             snip = tag.find_all('p')[0].text.replace('... More','...')
