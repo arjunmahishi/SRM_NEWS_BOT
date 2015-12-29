@@ -9,31 +9,21 @@ def sendMail(newNews):
         obj = open('email_list.txt')
         addr = obj.read().split('\n')
         obj.close()
-        html_input = ""
         FROM = gmail_user
         TO = addr
-        SUBJECT = 'News Updates'
+        SUBJECT = ''
 # Prepare actual message
-#message = """\From: %s\nTo: %s\nSubject: %s\n\n%s
-#""" % (FROM, ", ".join(TO), SUBJECT, TEXT)
         message = MIMEMultipart('alternative')
         message['From'] = FROM
         message['To'] = ", ".join(TO)
         message['Subject'] = SUBJECT
 # Create the body of the message (a plain-text and an HTML version).
         text = "This is a test message.\nText and html."
-        for i in range(len(newNews)): # contents #
-                html_input += str(i+1) + ". " + newNews[i].title + newNews[i].link + '\n' + newNews[i].snip + '\n'
-        html = """\
-        <html>
-          <head></head>
-          <body>
-            <p>Hi!<br></p>
-              <p>html_input
-            </p>
-          </body>
-        </html>
-        """
+        #for i in range(len(newNews)):# contents #
+                #html_data += str(i+1) + ". " + newNews[i].title + newNews[i].link + '\n' + newNews[i].snip + '\n'      
+        load = open("template.html", "r")
+        data = load.read()
+        html = """ %s """%(data)
 # Record the MIME types of both parts - text/plain and text/html.
         part1 = MIMEText(text, 'plain')
         part2 = MIMEText(html, 'html')
