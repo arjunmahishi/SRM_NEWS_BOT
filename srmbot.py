@@ -50,7 +50,7 @@ def getNewNews():
 def updateFile(newNews):
     obj = open('old_news.txt','a')
     for item in newNews:
-        obj.write(item.title + '\n')
+        obj.write(item.title.encode('UTF-8') + '\n')
     obj.close()
 
 def updateLog(msg):
