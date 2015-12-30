@@ -6,11 +6,11 @@ from email.mime.multipart import MIMEMultipart
 def getHTML(newNews):
         items = ""
         for i in range(len(newNews)):
-              item = '<a href=\"'+ newNews[i].link + '\"><h4>' + (str(i+1) + '. ' + newNews[i].title) + '</h4></a>\n\t<p>' + newNews[i].snip + '</p>\n\n\n'
+              item = '<a href=\"'+ newNews[i].link + '\"><h4><font color="#008080">' + (str(i+1) + '. ' + newNews[i].title) + '</font></h4></a>\n\t<p>' + newNews[i].snip + '</p>\n\n\n'
               items += item
         html = '''
                 <html>
-                <head><h2>News updates</h2></head>
+                <head><h1><font color="#eecc41">News updates</font></h1></head>
                 <body>
                 %s
                 </body>
@@ -54,10 +54,13 @@ def sendMail(newNews):
                 server.starttls()
                 server.login(gmail_user, gmail_pwd)
                 server.sendmail(FROM, TO, message.as_string())
-                print "Message sent to '%s'." % TO
+                print "Mail sent to '%s'." % TO
                 server.quit()            
         except smtplib.SMTPAuthenticationError as e:
-                print "Unable to send message: %s" % e
+                print "Unable to send mail: %s" % e
 
 if __name__ == '__main__':
-       #do nothing 
+        html = getHTML(srmbot.getNews())
+        obj = open('testhtml.html','w')
+        obj.write(html.encode('UTF-8'))
+        obj.close()
