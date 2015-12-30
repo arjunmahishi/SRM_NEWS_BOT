@@ -3,6 +3,14 @@ from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
 
+class person:
+        def __init__(self,name,emailID,pref):
+                self.name = name
+                self.emailID = emailID
+                for e in range(len(pref)):
+                        pref[e] = pref[e].replace('"','')
+                self.pref = pref
+
 def getHTML(newNews):
         items = ""
         for i in range(len(newNews)):
@@ -18,19 +26,35 @@ def getHTML(newNews):
                 ''' % items
         return html
 
+def getEmailData():
+        eList = []
+        obj = open('res.csv')
+        emailList = obj.read().split('\n')
+        temp = []
+        for e in emailList[1:]:
+                temp.append(e.split(',')[1:])
+        emailList = temp
+        obj.close()
+        for e in emailList:
+                eList.append(person(e[-1],e[0],e[1:len(e)-1]))
+        return eList
+        
+
 def sendMail(newNews):
         gmail_user = 'srm.news.notifier@gmail.com'
         gmail_pwd = 'notifier.gmail'
+        
         obj = open('email_list.txt')
         addr = obj.read().split('\n')
         obj.close()
+        
         FROM = gmail_user
         TO = addr
-        SUBJECT = 'News updates'
-# Prepare actual message
+        SUBJECT = 'News update'
+        
         message = MIMEMultipart('alternative')
         message['From'] = FROM
-        message['Bcc'] = ", ".join(TO)
+        message['To'] = ", ".join(TO)
         message['Subject'] = SUBJECT
 # Create the body of the message (a plain-text and an HTML version).
         text = "This is a test message.\nText and html."
@@ -55,7 +79,4 @@ def sendMail(newNews):
                 print "Unable to send mail: %s" % e
 
 if __name__ == '__main__':
-        html = getHTML(srmbot.getNews())
-        obj = open('testhtml.html','w')
-        obj.write(html.encode('UTF-8'))
-        obj.close()
+        l = getEmailData()
