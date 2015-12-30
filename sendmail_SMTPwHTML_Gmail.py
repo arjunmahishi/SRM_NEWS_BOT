@@ -26,19 +26,14 @@ def sendMail(newNews):
         obj.close()
         FROM = gmail_user
         TO = addr
-        SUBJECT = 'News update'
+        SUBJECT = 'News updates'
 # Prepare actual message
         message = MIMEMultipart('alternative')
         message['From'] = FROM
-        message['To'] = ", ".join(TO)
+        message['Bcc'] = ", ".join(TO)
         message['Subject'] = SUBJECT
 # Create the body of the message (a plain-text and an HTML version).
         text = "This is a test message.\nText and html."
-        #for i in range(len(newNews)):# contents #
-                #html_data += str(i+1) + ". " + newNews[i].title + newNews[i].link + '\n' + newNews[i].snip + '\n'      
-        ''' load = open("template.html", "r")
-        data = load.read()
-        html = """ %s """%(data)'''
         html = getHTML(newNews).encode('UTF-8')
 # Record the MIME types of both parts - text/plain and text/html.
         part1 = MIMEText(text, 'plain')
