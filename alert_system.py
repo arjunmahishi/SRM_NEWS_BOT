@@ -1,28 +1,30 @@
-import srmbot
+#import srmbot
 
-news = srmbot.getNews()
+#news = srmbot.getNews()
 
 def getStream(item):
     streams = []
-    if 'b.tech' in item.text.lower():
+    text = item.title.lower() + item.snip.lower()
+    if 'b.tech' in text:
         streams.append('btech')
-    if 'b.arch' in item.text.lower():
+    if 'b.arch' in text:
         streams.append('barch')
-    if 'm.tech' in item.text.lower():
+    if 'm.tech' in text:
         streams.append('mtech')
-    if 'dental' in item.text.lower():
+    if 'dental' in text:
         streams.append('dental')
     return streams
 
 def getBatch(item):
     batch = []
-    if 'first year' in item.text.lower() or '1st year' in item.text.lower():
+    text = item.title.lower() + item.snip.lower()
+    if 'first year' in text or '1st year' in text or '1st semester' in text or '2nd semester' in text:
         batch.append('first year')
-    if 'second year' in item.text.lower() or '2nd year' in item.text.lower():
+    if 'second year' in text or '2nd year' in text or '3rd semester' in text or '4th semester' in text:
         batch.append('second year')
-    if 'third year' in item.text.lower() or '3rd year' in item.text.lower():
+    if 'third year' in text or '3rd year' in text or '5th semester' in text or '6th semester' in text:
         batch.append('third year')
-    if 'fourth year' in item.text.lower() or '4th year' in item.text.lower():
+    if 'fourth year' in text or '4th year' in text or '7th semester' in text or '8th semester' in text:
         batch.append('fourth year')
     return batch
 
@@ -35,10 +37,10 @@ def getKeyWords(item):
            ] # ADD MORE #  #Sports categoory can also be added
     keyWords = []
     for e in ref:
-        if e in item.text.lower() and e not in keyWords:
+        if e in (item.title.lower() + item.snip.lower()) and e not in keyWords:
             keyWords.append(e)
     return keyWords
 
 # TESTING #
 #for e in news:
- #   print getKeyWords(e)
+ #   print str(getBatch(e)) + str(getStream(e)) + str(getKeyWords(e))
