@@ -54,7 +54,7 @@ def sendMail(newNews):
         
         message = MIMEMultipart('alternative')
         message['From'] = FROM
-        message['To'] = ", ".join(TO)
+        message['Bcc'] = ", ".join(TO)
         message['Subject'] = SUBJECT
 # Create the body of the message (a plain-text and an HTML version).
         text = "This is a test message.\nText and html."
