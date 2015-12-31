@@ -1,5 +1,3 @@
-# import sendmail_SMTP, srmbot
-
 def getStream(item):
     streams = []
     text = item.title.lower() + item.snip.lower()
@@ -38,13 +36,6 @@ def getKeyWords(item):
         if e in (item.title.lower() + item.snip.lower()) and e not in keyWords:
             keyWords.append(e)
     return keyWords
-
-def countCommon(alpha, beta):
-    gamma = srmbot.getNewNews() 
-    if getKeyWords.ref.split(',') == gamma.title
-        count += 1
-        print count
-    return count
 
 def getPref(item):
     pref = []
