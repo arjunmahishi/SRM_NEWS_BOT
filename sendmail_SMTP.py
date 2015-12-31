@@ -9,6 +9,7 @@ class person:
                 self.emailID = emailID
                 for e in range(len(pref)):
                         pref[e] = pref[e].replace('"','')
+                        pref[e] = pref[e].replace(' ','')
                 self.pref = pref
 
 def getHTML(newNews):
@@ -37,15 +38,18 @@ def getEmailData():
         emailList = temp
         obj.close()
         for e in emailList:
-                eList.append(person(e[-1],e[0],e[1:len(e)-1]))
+                eList.append(person(e[0],e[1],e[2:]))
         return eList
         
 
-def sendMail(newNews, addr):
+def sendMail(newNews, temp):
         """
           newNews : a list of newsItems to be sent to the given user(s).
           addr : a list of emailIDs. May contain 1 or more email IDs
         """
+        addr = []
+        for e in temp:
+                addr.append(e.emailID)
         gmail_user = 'srm.news.notifier@gmail.com'
         gmail_pwd = 'notifier.gmail'
         
@@ -74,7 +78,7 @@ def sendMail(newNews, addr):
                 server.starttls()
                 server.login(gmail_user, gmail_pwd)
                 server.sendmail(FROM, TO, message.as_string())
-                print "Mail sent to '%s'." % TO
+                print "Mail sent to '%s'." % addr
                 server.quit()            
         except smtplib.SMTPAuthenticationError as e:
                 print "Unable to send mail: %s" % e

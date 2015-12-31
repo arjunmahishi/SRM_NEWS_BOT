@@ -1,27 +1,38 @@
+def countCommon(l1,l2):
+    count = 0
+    temp = []
+    for a in l2:
+        temp.append(a.lower())
+    l2 = temp
+    for e in l1:
+        if e.lower() in l2:
+            count += 1
+    return count 
+
 def getStream(item):
     streams = []
-    text = item.title.lower() + item.snip.lower()
+    text = item.title.lower() + " " + item.snip.lower()
     if 'b.tech' in text:
-        streams.append('btech')
+        streams.append('b.tech')
     if 'b.arch' in text:
-        streams.append('barch')
+        streams.append('b.arch')
     if 'm.tech' in text:
-        streams.append('mtech')
+        streams.append('m.tech')
     if 'dental' in text:
         streams.append('dental')
     return streams
 
 def getBatch(item):
     batch = []
-    text = item.title.lower() + item.snip.lower()
+    text = item.title.lower() + " " + item.snip.lower()
     if 'first year' in text or '1st year' in text or '1st semester' in text or '2nd semester' in text:
-        batch.append('first year')
+        batch.append('first')
     if 'second year' in text or '2nd year' in text or '3rd semester' in text or '4th semester' in text:
-        batch.append('second year')
+        batch.append('second')
     if 'third year' in text or '3rd year' in text or '5th semester' in text or '6th semester' in text:
-        batch.append('third year')
+        batch.append('third')
     if 'fourth year' in text or '4th year' in text or '7th semester' in text or '8th semester' in text:
-        batch.append('fourth year')
+        batch.append('fourth')
     return batch
 
 # Get keywords from http://www.srmuniv.ac.in
@@ -55,7 +66,10 @@ def newsToEmail(item,eList):
     """
     IDs = []
     for e in eList:
-        if countCommon(item.pref,e.pref) > 0:
+        print getPref(item)
+        print e.pref
+        print e.pref
+        if countCommon(getPref(item),e.pref) > 0:
             IDs.append(e)
     return IDs
 
@@ -67,7 +81,7 @@ def emailToNews(eObj,newsItems):
     """
     items = []
     for e in newsItems:
-        if countCommon(eobj.pref,e.pref) > 0:
+        if countCommon(eObj.pref,getPref(e)) > 0:
             items.append(e)
     return items
 

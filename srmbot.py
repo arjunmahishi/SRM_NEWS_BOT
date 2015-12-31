@@ -1,4 +1,4 @@
-import urllib2, datetime, sendmail_SMTP
+import urllib2, datetime, sendmail_SMTP, marriage
 from bs4 import BeautifulSoup
 
 class newsItem:
@@ -66,10 +66,8 @@ def updateLog(msg):
 
 if __name__ == '__main__':
     newNews = getNewNews()
-    temp = sendmail_SMTP.getEmailData()
-    addr = []
-    for obj in temp:
-        addr.append(obj.emailID)
+    print str(len(newNews)) + ' new items'
+    addr = sendmail_SMTP.getEmailData()
     if newNews == 'fail':
         print "Not able to reach SRM"
         updateLog("Not able to reach SRM")
@@ -77,8 +75,15 @@ if __name__ == '__main__':
         print "Nothing new on the website"
         updateLog("Nothing new on the website")
     else:
-        sendmail_SMTP.sendMail(newNews,addr)
-        displayAllNews(newNews)
+        if len(newNews) == 1:
+            rec = marriage.newsToEmail(newNews[0],addr)
+            sendmail_SMTP.sendMail(newNews,rec)
+            displayAllNews(newNews)
+        else:
+            for e in addr:
+                neededNews = marriage.emailToNews(e,newNews)
+                sendmail_SMTP.sendMail(newNews,e)
+                displayAllNews(neededNews)
         updateLog(str(len(newNews)) + " news items are new!")
         updateFile(newNews)
     #raw_input() # hold
