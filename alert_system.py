@@ -47,6 +47,30 @@ def getPref(item):
         pref.append(e)
     return pref
 
+def newsToEmail(item,eList):
+    """
+      - item : One news item
+      - eList : A list of all person objects
+      - return : a list of validated email objects
+    """
+    IDs = []
+    for e in eList:
+        if countCommon(item.pref,e.pref) > 0:
+            IDs.append(e)
+    return IDs
+
+def emailToNews(eObj,newsItems):
+    """
+      - eObj : an email object
+      - newsItems : a list of news objects
+      - return : a list of validated news objects
+    """
+    items = []
+    for e in newsItems:
+        if countCommon(eobj.pref,e.pref) > 0:
+            items.append(e)
+    return items
+
 # TESTING #
 #for e in news:
  #   print str(getBatch(e)) + str(getStream(e)) + str(getKeyWords(e))
