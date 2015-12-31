@@ -86,4 +86,4 @@ if __name__ == '__main__':
                 displayAllNews(neededNews)
         updateLog(str(len(newNews)) + " news items are new!")
         updateFile(newNews)
-    #raw_input() # hold
+    raw_input() # hold

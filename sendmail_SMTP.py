@@ -48,8 +48,11 @@ def sendMail(newNews, temp):
           addr : a list of emailIDs. May contain 1 or more email IDs
         """
         addr = []
-        for e in temp:
-                addr.append(e.emailID)
+        try:
+                for e in temp:
+                        addr.append(e.emailID)
+        except TypeError:
+                addr.append(temp.emailID)
         gmail_user = 'srm.news.notifier@gmail.com'
         gmail_pwd = 'notifier.gmail'
         
