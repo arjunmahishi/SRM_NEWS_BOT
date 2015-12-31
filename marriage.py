@@ -1,11 +1,11 @@
-def countCommon(l1,l2):
+def countCommon(L1,L2):
     count = 0
     temp = []
-    for a in l2:
+    for a in L2:
         temp.append(a.lower())
-    l2 = temp
-    for e in l1:
-        if e.lower() in l2:
+    L2 = temp
+    for e in L1:
+        if e.lower() in L2:
             count += 1
     return count 
 
@@ -48,7 +48,7 @@ def getKeyWords(item):
             keyWords.append(e)
     return keyWords
 
-def getPref(item):
+def getPref(item):       #Gets Complete info about the news item
     pref = []
     for e in getKeyWords(item):
         pref.append(e)
@@ -67,8 +67,6 @@ def newsToEmail(item,eList):
     IDs = []
     for e in eList:
         print getPref(item)
-        print e.pref
-        print e.pref
         if countCommon(getPref(item),e.pref) > 0:
             IDs.append(e)
     return IDs
@@ -84,7 +82,3 @@ def emailToNews(eObj,newsItems):
         if countCommon(eObj.pref,getPref(e)) > 0:
             items.append(e)
     return items
-
-# TESTING #
-#for e in news:
- #   print str(getBatch(e)) + str(getStream(e)) + str(getKeyWords(e))
