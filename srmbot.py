@@ -1,4 +1,4 @@
-import urllib2, datetime, sendmail_SMTPwHTML_Gmail
+import urllib2, datetime, sendmail_SMTP
 from bs4 import BeautifulSoup
 
 class newsItem:
@@ -66,6 +66,10 @@ def updateLog(msg):
 
 if __name__ == '__main__':
     newNews = getNewNews()
+    temp = sendmail_SMTP.getEmailData()
+    addr = []
+    for obj in temp:
+        addr.append(obj.emailID)
     if newNews == 'fail':
         print "Not able to reach SRM"
         updateLog("Not able to reach SRM")
@@ -73,7 +77,7 @@ if __name__ == '__main__':
         print "Nothing new on the website"
         updateLog("Nothing new on the website")
     else:
-        sendmail_SMTPwHTML_Gmail.sendMail(newNews)
+        sendmail_SMTP.sendMail(newNews,addr)
         displayAllNews(newNews)
         updateLog(str(len(newNews)) + " news items are new!")
         updateFile(newNews)

@@ -27,6 +27,7 @@ def getHTML(newNews):
         return html
 
 def getEmailData():
+        # Don't bother to understand. Because nither do I. It just works.
         eList = []
         obj = open('res.csv')
         emailList = obj.read().split('\n')
@@ -40,17 +41,17 @@ def getEmailData():
         return eList
         
 
-def sendMail(newNews):
+def sendMail(newNews, addr):
+        """
+          newNews : a list of newsItems to be sent to the given user(s).
+          addr : a list of emailIDs. May contain 1 or more email IDs
+        """
         gmail_user = 'srm.news.notifier@gmail.com'
         gmail_pwd = 'notifier.gmail'
         
-        obj = open('email_list.txt')
-        addr = obj.read().split('\n')
-        obj.close()
-        
         FROM = gmail_user
         TO = addr
-        SUBJECT = 'News update'
+        SUBJECT = 'News updates'
         
         message = MIMEMultipart('alternative')
         message['From'] = FROM
