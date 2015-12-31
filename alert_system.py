@@ -1,7 +1,3 @@
-#import srmbot
-
-#news = srmbot.getNews()
-
 def getStream(item):
     streams = []
     text = item.title.lower() + item.snip.lower()
@@ -40,6 +36,16 @@ def getKeyWords(item):
         if e in (item.title.lower() + item.snip.lower()) and e not in keyWords:
             keyWords.append(e)
     return keyWords
+
+def getPref(item):
+    pref = []
+    for e in getKeyWords(item):
+        pref.append(e)
+    for e in getBatch(item):
+        pref.append(e)
+    for e in getStream(item):
+        pref.append(e)
+    return pref
 
 # TESTING #
 #for e in news:
