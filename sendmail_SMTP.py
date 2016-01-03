@@ -1,4 +1,4 @@
-import smtplib
+import smtplib, base64
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
@@ -54,7 +54,7 @@ def sendMail(newNews, temp):
         except TypeError:
                 addr.append(temp.emailID)
         gmail_user = 'srm.news.notifier@gmail.com'
-        gmail_pwd = 'notifier.gmail'
+        gmail_pwd = base64.b64decode("MTIwMG5vdGlmeS5tZQ==")
         
         FROM = gmail_user
         TO = addr
