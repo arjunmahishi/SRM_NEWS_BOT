@@ -52,6 +52,7 @@ def sendMail(newNews, temp):
         
         FROM = gmail_user
         TO = addr
+        print TO
         SUBJECT = 'News updates'
         
         message = MIMEMultipart('alternative')
