@@ -15,16 +15,10 @@ class person:
 def getHTML(newNews):
         items = ""
         for i in range(len(newNews)):
-              item = '<a href=\"'+ newNews[i].link + '\"><h4><font color="#008080">' + (str(i+1) + '. ' + newNews[i].title) + '</font></h4></a>\n\t<p>' + newNews[i].snip + '</p>\n\n\n'
+              item = '<div  class="col s12 m4 l4"><div class="center promo promo-example"><h5 class="promo-caption"><a href=\"'+ newNews[i].link + '\'>' + (str(i+1) + '. ' + newNews[i].title)</h4> + <p class="light center"> + newNews[i].snip + '</p></div>'
               items += item
-        html = '''
-                <html>
-                <head><h1><font color="#eecc41">News updates</font></h1></head>
-                <body>
-                %s
-                </body>
-                </html>
-                ''' % items
+        html = obj.open("index.html")
+        html = html.replace("content", items)
         return html
 
 def getEmailData():
