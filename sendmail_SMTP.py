@@ -13,12 +13,22 @@ class person:
                 self.pref = pref
 
 def getHTML(newNews):
+        """
+            <div  class="col s12 m4 l4">
+                <div class="center promo promo-example">
+                    <h5 class="promo-caption">   </h5>
+                    <p class="light center">   </p>
+                </div>
+            </div>
+        """
         items = ""
         for i in range(len(newNews)):
-              item = '<div  class="col s12 m4 l4"><div class="center promo promo-example"><h5 class="promo-caption"><a href=\"'+ newNews[i].link + '\'>' + (str(i+1) + '. ' + newNews[i].title)</h4> + <p class="light center"> + newNews[i].snip + '</p></div>'
+              item = '<div  class="col s12 m4 l4"><div class="center promo promo-example"><a href=\"'
+              item += newNews[i].link + '\"><h5 class="promo-caption">'+ (str(i+1) + '. ' + newNews[i].title)
+              item += '</h5></a>\n<p class="light center">' + newNews[i].snip + '</p>\n'
               items += item
-        html = obj.open("index.html")
-        html = html.replace("content", items)
+        html = open('index.html').read()
+        html = html.replace('---contents---',items)
         return html
 
 def getEmailData():
@@ -52,7 +62,6 @@ def sendMail(newNews, temp):
         
         FROM = gmail_user
         TO = addr
-        print TO
         SUBJECT = 'News updates'
         
         message = MIMEMultipart('alternative')
@@ -82,4 +91,5 @@ def sendMail(newNews, temp):
                 print "Unable to send mail: %s" % e
 
 if __name__ == '__main__':
-        l = getEmailData()
+        print 'no errors'
+        #l = getEmailData()

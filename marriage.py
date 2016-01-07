@@ -41,7 +41,7 @@ def getKeyWords(item):
            'exam','change in schedule','dates', 'rescheduled','holiday',
            'holidays','timetable','urgent', 'time table', 'schedule',
            'practicals', 'postponed', 'tournaments', 'attendance'
-           ] # ADD MORE #  #Sports categoory can also be added
+           ] # ADD MORE #
     keyWords = []
     for e in ref:
         if e in (item.title.lower() + item.snip.lower()) and e not in keyWords:
@@ -50,8 +50,12 @@ def getKeyWords(item):
 
 def getPref(item):       #Gets Complete info about the news item
     pref = []
-    for e in getKeyWords(item):
-        pref.append(e)
+    if len(getKeyWords(item)) == 0:
+        #print item.title
+        pref.append('GeneralNews/Announcements')
+    else:
+        for e in getKeyWords(item):
+            pref.append(e)
     for e in getBatch(item):
         pref.append(e)
     for e in getStream(item):

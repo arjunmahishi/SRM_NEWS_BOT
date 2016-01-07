@@ -77,13 +77,15 @@ if __name__ == '__main__':
     else:
         if len(newNews) == 1:
             rec = marriage.newsToEmail(newNews[0],addr)
-            sendmail_SMTP.sendMail(newNews,rec)
+            #sendmail_SMTP.sendMail(newNews,rec)
+            print addr
             displayAllNews(newNews)
         else:
             for e in addr:
                 neededNews = marriage.emailToNews(e,newNews)
-                sendmail_SMTP.sendMail(newNews,e)
+                #sendmail_SMTP.sendMail(newNews,e)
+                print e.emailID + " : "
                 displayAllNews(neededNews)
         updateLog(str(len(newNews)) + " news items are new!")
         updateFile(newNews)
-    raw_input() # hold
+    #raw_input() # hold
