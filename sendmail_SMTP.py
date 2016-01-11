@@ -1,4 +1,4 @@
-import smtplib, base64
+import smtplib, base64, datetime
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
@@ -13,28 +13,32 @@ class person:
                 self.pref = pref
 
 def getHTML(newNews):
-        """
-            <div  class="col s12 m4 l4">
-                <div class="center promo promo-example">
-                    <h5 class="promo-caption">   </h5>
-                    <p class="light center">   </p>
-                </div>
-            </div>
-        """
+        obj = open("index.html")
         items = ""
+        """<tr>
+                    <td style=\"font-size: 13px; color: #959595; font-weight: normal; text-align: left; font-family: Georgia, Times, serif; line-height: 24px; vertical-align: top; padding:10px 8px 10px 8px\" bgcolor=\"#eeeeed\">
+                        <table>
+                            <tr>
+                                <td valign=\"middle\" style=\"padding:0 10px 10px 0\"><a href=\"newNews[i].link\" style=\"text-decoration: none; color: #272727; font-size: 20px!important; color: #272727; font-weight: bold; font-family:Arial, sans-serif\">newNews[i].title</a>
+                                </td>
+                            </tr>
+                        </table>	
+                             <p style=\"font-size: 250% !important;\">newNews[i].snip</p>
+						 </td>
+                </tr>"""
         for i in range(len(newNews)):
-              item = '<div  class="col s12 m4 l4"><div class="center promo promo-example"><a href=\"'
-              item += newNews[i].link + '\"><h5 class="promo-caption">'+ (str(i+1) + '. ' + newNews[i].title)
-              item += '</h5></a>\n<p class="light center">' + newNews[i].snip + '</p>\n'
-              items += item
-        html = open('index.html').read()
-        html = html.replace('---contents---',items)
+              item = '<tr><td style="font-size: 13px; color: #959595; font-weight: normal; text-align: left; font-family: Georgia, Times, serif; line-height: 24px; vertical-align: top; padding:10px 8px 10px 8px" bgcolor="#eeeeed"><table><tr><td valign="middle" style="padding:0 10px 10px 0\"><a href="'
+              item += newNews[i].link + '" style="text-decoration: none; color: #272727; font-size: 20px!important; color: #272727; font-weight: bold; font-family:Arial, sans-serif">'
+              item += newNews[i].title + '</a></td></tr></table><p style="font-size: 250% !important;">' + newNews[i].snip + '</p></td></tr>'
+              items += item.encode('UTF-8')
+        html = obj.read()
+        html = html.replace("--contents--", items)
         return html
 
 def getEmailData():
         # Don't bother to understand. Because nither do I. It just works.
         eList = []
-        obj = open('res.csv')
+        obj = open('email_data.csv')
         emailList = obj.read().split('\n')
         temp = []
         for e in emailList[1:]:
@@ -62,6 +66,8 @@ def sendMail(newNews, temp):
         
         FROM = gmail_user
         TO = addr
+        print TO
+        #now = datetime.datetime.now()
         SUBJECT = 'News updates'
         
         message = MIMEMultipart('alternative')
@@ -70,7 +76,7 @@ def sendMail(newNews, temp):
         message['Subject'] = SUBJECT
 # Create the body of the message (a plain-text and an HTML version).
         text = "This is a test message.\nText and html."
-        html = getHTML(newNews).encode('UTF-8')
+        html = getHTML(newNews)
 # Record the MIME types of both parts - text/plain and text/html.
         part1 = MIMEText(text, 'plain')
         part2 = MIMEText(html, 'html')
@@ -91,5 +97,4 @@ def sendMail(newNews, temp):
                 print "Unable to send mail: %s" % e
 
 if __name__ == '__main__':
-        print 'no errors'
-        #l = getEmailData()
+        l = getEmailData()

@@ -66,7 +66,6 @@ def updateLog(msg):
 
 if __name__ == '__main__':
     newNews = getNewNews()
-    print str(len(newNews)) + ' new items'
     addr = sendmail_SMTP.getEmailData()
     if newNews == 'fail':
         print "Not able to reach SRM"
@@ -75,17 +74,16 @@ if __name__ == '__main__':
         print "Nothing new on the website"
         updateLog("Nothing new on the website")
     else:
+        print str(len(newNews)) + ' new items'
         if len(newNews) == 1:
             rec = marriage.newsToEmail(newNews[0],addr)
             sendmail_SMTP.sendMail(newNews,rec)
-            print addr
             displayAllNews(newNews)
         else:
             for e in addr:
                 neededNews = marriage.emailToNews(e,newNews)
                 sendmail_SMTP.sendMail(newNews,e)
-                print e.emailID + " : "
                 displayAllNews(neededNews)
         updateLog(str(len(newNews)) + " news items are new!")
         updateFile(newNews)
-    #raw_input() # hold
+    raw_input() # hold
