@@ -1,4 +1,4 @@
-import smtplib, base64, datetime
+import smtplib, base64, datetime, socks
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
@@ -27,9 +27,9 @@ def getHTML(newNews):
 						 </td>
                 </tr>"""
         for i in range(len(newNews)):
-              item = '<tr><td style="font-size: 13px; color: #959595; font-weight: normal; text-align: left; font-family: Georgia, Times, serif; line-height: 24px; vertical-align: top; padding:10px 8px 10px 8px" bgcolor="#eeeeed"><table><tr><td valign="middle" style="padding:0 10px 10px 0\"><a href="'
-              item += newNews[i].link + '" style="text-decoration: none; color: #272727; font-size: 20px!important; color: #272727; font-weight: bold; font-family:Arial, sans-serif">'
-              item += newNews[i].title + '</a></td></tr></table><p style="font-size: 250% !important;">' + newNews[i].snip + '</p></td></tr>'
+              item = '<tr><td style="font-size: 10px; color: #959595; font-weight: normal; text-align: left; font-family: Georgia, Times, serif; line-height: 24px; vertical-align: top; padding:10px 8px 10px 8px" bgcolor="#eeeeed"><table><tr><td valign="middle" style="padding:0 10px 10px 0\"><a href="'
+              item += newNews[i].link + '" style="text-decoration: none; color: #272727; font-size: 22px!important; color: #272727; font-weight: bold; font-family:Arial, sans-serif">'
+              item += str(i + 1) + ". " + newNews[i].title + '</a></td></tr></table><p style="font-size: 250% !important;"><a href = "' + newNews[i].link + '" >' + newNews[i].snip + '</a></p></td></tr>'
               items += item.encode('UTF-8')
         html = obj.read()
         html = html.replace("--contents--", items)
@@ -95,6 +95,3 @@ def sendMail(newNews, temp):
                 server.quit()            
         except smtplib.SMTPAuthenticationError as e:
                 print "Unable to send mail: %s" % e
-
-if __name__ == '__main__':
-        l = getEmailData()
