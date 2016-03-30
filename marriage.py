@@ -9,19 +9,6 @@ def countCommon(L1,L2):
             count += 1
     return count 
 
-def getStream(item):
-    streams = []
-    text = item.title.lower() + " " + item.snip.lower()
-    if 'b.tech' in text:
-        streams.append('b.tech')
-    if 'b.arch' in text:
-        streams.append('b.arch')
-    if 'm.tech' in text:
-        streams.append('m.tech')
-    if 'dental' in text:
-        streams.append('dental')
-    return streams
-
 def getBatch(item):
     batch = []
     text = item.title.lower() + " " + item.snip.lower()
@@ -37,15 +24,32 @@ def getBatch(item):
 
 # Get keywords from http://www.srmuniv.ac.in
 def getKeyWords(item):
-    ref = [
-           'exam','change in schedule','dates', 'rescheduled','holiday',
-           'holidays','timetable','urgent', 'time table', 'schedule',
-           'practicals', 'postponed', 'tournaments', 'attendance'
-           ] # ADD MORE #  #Sports categoory can also be added
+    imp = [
+           'exam', 'exams', 'change in schedule', 'date', 'dates', 'rescheduled','holiday',
+           'holidays','timetable','urgent', 'time table', 'schedule', 'scheduled',
+           'practicals', 'postponed', 'attendance', 'examination', 'examinations'
+           ] # ADD MORE #
+    events_n_sports = [
+                    'tournament', 'tournaments', 'game', 'tennis', 'won', 'venue'
+                  ]
+    univ = [
+              'passed', 'closed', 'reopen', 'reopened'
+            ]
     keyWords = []
-    for e in ref:
-        if e in (item.title.lower() + item.snip.lower()) and e not in keyWords:
-            keyWords.append(e)
+    for e in imp:
+        if e in (item.title.lower() + item.snip.lower()).split(' ') and e not in keyWords:
+            keyWords.append('AcademicNews')
+            break
+    for e in events_n_sports:
+        if e in (item.title.lower() + item.snip.lower()).split(' '):
+            keyWords.append('Events/Sports')
+            break
+
+    for e in univ:
+        if e in (item.title.lower() + item.snip.lower()).split(' '):
+            keyWords.append('UniversityUpdates')
+            break
+    
     return keyWords
 
 def getPref(item):       #Gets Complete info about the news item
@@ -54,8 +58,8 @@ def getPref(item):       #Gets Complete info about the news item
         pref.append(e)
     for e in getBatch(item):
         pref.append(e)
-    for e in getStream(item):
-        pref.append(e)
+    if len(pref) == 0:
+        pref.append("UniversityUpdates")
     return pref
 
 def newsToEmail(item,eList):
@@ -67,13 +71,13 @@ def newsToEmail(item,eList):
     IDs = []
     for e in eList:
         print getPref(item)
-        if countCommon(getPref(item),e.pref) > 0:
+        if countCommon(getPref(item),e.pref) > 0: 
             IDs.append(e)
     return IDs
 
 def emailToNews(eObj,newsItems):
     """
-      - eObj : an email object
+      - eObj : one email object
       - newsItems : a list of news objects
       - return : a list of validated news objects
     """

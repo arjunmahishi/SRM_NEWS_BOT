@@ -14,7 +14,7 @@ def displayAllNews(news):
 def getNews():
     news = []
     try:
-        data1 = urllib2.urlopen("http://www.srmuniv.ac.in/Announcements").read()
+        data1 = urllib2.urlopen("http://www.srmuniv.ac.in/Announcements?page=2").read()
         data2 = urllib2.urlopen("http://www.srmuniv.ac.in/University-News").read()
         soup1 = BeautifulSoup(data1,'html.parser')
         soup2 = BeautifulSoup(data2,'html.parser')
@@ -66,7 +66,6 @@ def updateLog(msg):
 
 if __name__ == '__main__':
     newNews = getNewNews()
-    print str(len(newNews)) + ' new items'
     addr = sendmail_SMTP.getEmailData()
     if newNews == 'fail':
         print "Not able to reach SRM"
@@ -75,6 +74,7 @@ if __name__ == '__main__':
         print "Nothing new on the website"
         updateLog("Nothing new on the website")
     else:
+        print str(len(newNews)) + ' new items'
         if len(newNews) == 1:
             rec = marriage.newsToEmail(newNews[0],addr)
             sendmail_SMTP.sendMail(newNews,rec)
