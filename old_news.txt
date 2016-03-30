@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Reopening Dates - E&T, MHS, Management and S&H
 University Examinations Cancelled
 SRM University Examinations - Rescheduled Timetables 
@@ -13,3 +14,5 @@ SRM University to Host Second HNU-SRM Linton Global Leadership Program
 Ratan Tata Visits SRM University
 International Chemical Congress of Pacific Basin Societies Awards 40 Early Career Chemists
 SRM Alumni Clears Civil Service Examination with All India Rank 338
+=======
+>>>>>>> origin/master
