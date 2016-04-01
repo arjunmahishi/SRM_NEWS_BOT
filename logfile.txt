@@ -1,9 +1,0 @@
-2016-02-02 23:40:34.094000 : 15 news items are new!
-2016-02-02 23:48:01.558000 : 15 news items are new!
-2016-02-02 23:55:00.930000 : 15 news items are new!
-2016-02-02 23:58:35.794000 : 15 news items are new!
-2016-02-03 00:01:34.159000 : 15 news items are new!
-2016-02-03 00:02:33.363000 : 15 news items are new!
-2016-02-03 00:28:00.526679 : 15 news items are new!
-2016-02-03 10:52:53.368614 : Nothing new on the website
-2016-02-03 10:55:29.817768 : 15 news items are new!

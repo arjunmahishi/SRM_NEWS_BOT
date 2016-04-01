@@ -14,7 +14,7 @@ def displayAllNews(news):
 def getNews():
     news = []
     try:
-        data1 = urllib2.urlopen("http://www.srmuniv.ac.in/Announcements?page=2").read()
+        data1 = urllib2.urlopen("http://www.srmuniv.ac.in/Announcements").read()
         data2 = urllib2.urlopen("http://www.srmuniv.ac.in/University-News").read()
         soup1 = BeautifulSoup(data1,'html.parser')
         soup2 = BeautifulSoup(data2,'html.parser')

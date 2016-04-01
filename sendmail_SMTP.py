@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 import smtplib, base64, datetime
-=======
-import smtplib, base64, datetime, socks
->>>>>>> origin/master
+
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
@@ -65,14 +62,16 @@ def sendMail(newNews, temp):
                         addr.append(e.emailID)
         except TypeError:
                 addr.append(temp.emailID)
+                
         gmail_user = 'srm.news.notifier@gmail.com'
         #gmail_pwd = base64.b64decode("MTIwMG5vdGlmeS5tZQ==")  //old pass
-        #gmail_pwd = ''
+        gmail_pwd = ''  // Add Gmail password before executing
+
         FROM = gmail_user
         TO = addr
         print TO
         #now = datetime.datetime.now()
-        SUBJECT = 'News updates'
+        SUBJECT = 'News Updates'
         
         message = MIMEMultipart('alternative')
         message['From'] = FROM
